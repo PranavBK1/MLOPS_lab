@@ -1,0 +1,17 @@
+{
+  "version_id": "v1",
+  "source_path": "C:\\Users\\Pranav\\Downloads\\week04-versioning-feature-store\\week04-versioning-feature-store\\data\\v1\\transactions.csv",
+  "content_hash": "9e67768d6aea454cfd80385a80186d4f4ecdd0abbb9f7ed64852f8c253dcfd1a",
+  "columns": [
+    "transaction_id",
+    "card_id",
+    "timestamp",
+    "amount",
+    "merchant_category",
+    "country",
+    "card_present",
+    "is_fraud"
+  ],
+  "row_count": 500,
+  "created_at": "2026-08-26T12:21:45.783589+00:00"
+}

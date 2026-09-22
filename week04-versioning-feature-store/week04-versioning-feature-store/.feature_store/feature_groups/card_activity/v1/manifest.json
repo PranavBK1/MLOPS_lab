@@ -1,0 +1,16 @@
+{
+  "feature_group_version_id": "v1",
+  "name": "card_activity",
+  "source_raw_version_id": "v1",
+  "transform_version": "v1",
+  "schema": [
+    "avg_amount",
+    "card_id",
+    "event_time",
+    "max_amount",
+    "pct_card_present",
+    "txn_count"
+  ],
+  "row_count": 371,
+  "created_at": "2026-08-26T12:21:45.798855+00:00"
+}

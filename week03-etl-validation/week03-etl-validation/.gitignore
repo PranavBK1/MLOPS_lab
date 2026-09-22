@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# NOTE: data/clean_transactions.csv, data/quarantined_transactions.csv, and
+# data/validation_report.json are NOT ignored — they are required deliverables
+# per ASSIGNMENT.md. Running `python src/etl.py --config config.yaml` after you
+# implement run_etl() will regenerate them with your real results.
