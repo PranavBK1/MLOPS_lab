@@ -1,0 +1,4 @@
+input_path: data/v1/transactions.json
+input_format: json          # csv | json
+high_value_threshold: 9000
+output_path: data/v1/report_json.json
