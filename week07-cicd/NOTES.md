@@ -19,3 +19,15 @@ was never going to be worth testing in the first place. Gating it behind
 fast checks have already confirmed the code is at least superficially sound,
 so broken code fails fast (in seconds) instead of burning minutes building
 and running a container that was doomed anyway.
+
+## Repo layout note
+
+This lab lives inside a personal monorepo (`MLOPS_lab`) alongside other
+weeks' labs, each in its own subfolder. GitHub Actions only discovers
+workflow files under the repository's *top-level* `.github/workflows/`, so
+the file that actually triggers CI on GitHub is
+`.github/workflows/week07-ci.yml` at the repo root (with
+`working-directory: week07-cicd` and a `paths: ["week07-cicd/**"]` filter).
+It mirrors `week07-cicd/.github/workflows/ci.yml`, which stays in place
+unchanged so `tests/test_ci_config.py`'s self-check keeps working exactly as
+the lab README describes.

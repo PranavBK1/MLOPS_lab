@@ -12,6 +12,7 @@ on:
   pull_request:
     branches: [main]
     paths: ["week07-cicd/**"]
+  workflow_dispatch: {}
 
 defaults:
   run:
