@@ -1,0 +1,24 @@
+{
+  "reference_camera": "camera_A_daylight",
+  "live_camera": "camera_B_lowlight",
+  "reference_summary": {
+    "count": 83,
+    "mean": 0.975,
+    "std": 0.0301,
+    "min": 0.778,
+    "max": 0.98
+  },
+  "live_summary": {
+    "count": 80,
+    "mean": 0.9789,
+    "std": 0.0096,
+    "min": 0.894,
+    "max": 0.98
+  },
+  "psi": 0.1916,
+  "drift_level": "moderate",
+  "thresholds": {
+    "moderate": 0.1,
+    "significant": 0.25
+  }
+}
