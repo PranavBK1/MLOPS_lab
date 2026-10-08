@@ -48,9 +48,35 @@ def topological_order(tasks: Dict[str, Task]) -> List[str]:
     append it to the result. If you run out of in-degree-0 tasks before
     placing every task, there's a cycle.
     """
-    # TODO: implement
-    raise NotImplementedError
+    # Validate first: every dependency must name a task that exists.
+    for name, task in tasks.items():
+        for dep in task.depends_on:
+            if dep not in tasks:
+                raise ValueError(f"task {name!r} depends on unknown task {dep!r}")
 
+    # in_degree[t] = number of unmet dependencies; dependents[d] = tasks waiting on d.
+    in_degree = {name: len(set(task.depends_on)) for name, task in tasks.items()}
+    dependents = {name: [] for name in tasks}
+    for name, task in tasks.items():
+        for dep in set(task.depends_on):
+            dependents[dep].append(name)
+
+    # Kahn's algorithm. Seeding the queue in dict order keeps the result
+    # deterministic for a given task definition.
+    ready = [name for name in tasks if in_degree[name] == 0]
+    order = []
+    while ready:
+        current = ready.pop(0)
+        order.append(current)
+        for child in dependents[current]:
+            in_degree[child] -= 1
+            if in_degree[child] == 0:
+                ready.append(child)
+
+    if len(order) != len(tasks):
+        stuck = sorted(name for name in tasks if name not in order)
+        raise ValueError(f"dependency cycle detected among tasks: {stuck}")
+    return order
 
 
 # ---------------------------------------------------------------------------
@@ -68,9 +94,16 @@ def run_task_with_retry(task: Task, context: dict) -> int:
     If it never succeeds, let the LAST exception propagate (don't swallow
     it) after all retries are exhausted.
     """
-    # TODO: implement
-    raise NotImplementedError
-
+    total_attempts = task.max_retries + 1
+    for attempt in range(1, total_attempts + 1):
+        try:
+            task.fn(context)
+            return attempt
+        except Exception:
+            if attempt == total_attempts:
+                raise  # out of retries: propagate the LAST exception unchanged
+            if task.retry_delay_seconds > 0:
+                time.sleep(task.retry_delay_seconds)
 
 
 # ---------------------------------------------------------------------------
@@ -94,5 +127,32 @@ def run_dag(tasks: Dict[str, Task], context: dict) -> dict:
 
     Return {"order": <the order you computed>, "task_results": task_results}.
     """
-    # TODO: implement
-    raise NotImplementedError
+    order = topological_order(tasks)
+    task_results = {}
+
+    for name in order:
+        task = tasks[name]
+        # Count attempts here as well, so a failed task can still report how
+        # many times it was tried (run_task_with_retry only returns on success).
+        attempts = {"n": 0}
+        original_fn = task.fn
+
+        def counted_fn(ctx, _fn=original_fn):
+            attempts["n"] += 1
+            return _fn(ctx)
+
+        counted_task = Task(
+            name=task.name,
+            fn=counted_fn,
+            depends_on=list(task.depends_on),
+            max_retries=task.max_retries,
+            retry_delay_seconds=task.retry_delay_seconds,
+        )
+        try:
+            n = run_task_with_retry(counted_task, context)
+            task_results[name] = {"status": "success", "attempts": n}
+        except Exception as exc:
+            task_results[name] = {"status": "failed", "attempts": attempts["n"], "error": str(exc)}
+            break  # downstream (later-in-order) tasks don't run after a failure
+
+    return {"order": order, "task_results": task_results}
