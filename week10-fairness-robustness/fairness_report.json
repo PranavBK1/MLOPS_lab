@@ -1,0 +1,200 @@
+{
+  "recall_threshold": 0.9,
+  "category_stats": {
+    "Tempo-traveller": {
+      "total": 19,
+      "detected": 18,
+      "recall": 0.9474
+    },
+    "SUV": {
+      "total": 18,
+      "detected": 18,
+      "recall": 1.0
+    },
+    "Hatchback": {
+      "total": 20,
+      "detected": 19,
+      "recall": 0.95
+    },
+    "LCV": {
+      "total": 16,
+      "detected": 16,
+      "recall": 1.0
+    },
+    "Truck": {
+      "total": 19,
+      "detected": 19,
+      "recall": 1.0
+    },
+    "Other": {
+      "total": 11,
+      "detected": 10,
+      "recall": 0.9091
+    },
+    "Three-wheeler": {
+      "total": 14,
+      "detected": 14,
+      "recall": 1.0
+    },
+    "Bus": {
+      "total": 18,
+      "detected": 17,
+      "recall": 0.9444
+    },
+    "MUV": {
+      "total": 19,
+      "detected": 16,
+      "recall": 0.8421
+    },
+    "Sedan": {
+      "total": 23,
+      "detected": 22,
+      "recall": 0.9565
+    },
+    "Two-wheeler": {
+      "total": 16,
+      "detected": 14,
+      "recall": 0.875
+    },
+    "Bicycle": {
+      "total": 14,
+      "detected": 11,
+      "recall": 0.7857
+    },
+    "Van": {
+      "total": 18,
+      "detected": 17,
+      "recall": 0.9444
+    },
+    "Mini-bus": {
+      "total": 18,
+      "detected": 18,
+      "recall": 1.0
+    }
+  },
+  "underperforming_categories": [
+    {
+      "category": "Bicycle",
+      "recall": 0.7857
+    },
+    {
+      "category": "MUV",
+      "recall": 0.8421
+    },
+    {
+      "category": "Two-wheeler",
+      "recall": 0.875
+    }
+  ],
+  "adversarial": {
+    "eps_values": [
+      0,
+      10,
+      20,
+      30,
+      40
+    ],
+    "recall_by_eps": {
+      "0": {
+        "Tempo-traveller": 0.9474,
+        "SUV": 1.0,
+        "Hatchback": 0.95,
+        "LCV": 1.0,
+        "Truck": 1.0,
+        "Other": 0.9091,
+        "Three-wheeler": 1.0,
+        "Bus": 0.9444,
+        "MUV": 0.8421,
+        "Sedan": 0.9565,
+        "Two-wheeler": 0.875,
+        "Bicycle": 0.7857,
+        "Van": 0.9444,
+        "Mini-bus": 1.0
+      },
+      "10": {
+        "Tempo-traveller": 0.8421,
+        "SUV": 1.0,
+        "Hatchback": 0.85,
+        "LCV": 0.875,
+        "Truck": 0.8947,
+        "Other": 0.7273,
+        "Three-wheeler": 1.0,
+        "Bus": 0.8889,
+        "MUV": 0.7895,
+        "Sedan": 0.913,
+        "Two-wheeler": 0.6875,
+        "Bicycle": 0.6429,
+        "Van": 0.9444,
+        "Mini-bus": 0.8889
+      },
+      "20": {
+        "Tempo-traveller": 0.7368,
+        "SUV": 0.8889,
+        "Hatchback": 0.8,
+        "LCV": 0.8125,
+        "Truck": 0.8421,
+        "Other": 0.7273,
+        "Three-wheeler": 0.7857,
+        "Bus": 0.7778,
+        "MUV": 0.6842,
+        "Sedan": 0.8261,
+        "Two-wheeler": 0.625,
+        "Bicycle": 0.6429,
+        "Van": 0.7778,
+        "Mini-bus": 0.8333
+      },
+      "30": {
+        "Tempo-traveller": 0.7368,
+        "SUV": 0.7778,
+        "Hatchback": 0.7,
+        "LCV": 0.6875,
+        "Truck": 0.7368,
+        "Other": 0.2727,
+        "Three-wheeler": 0.6429,
+        "Bus": 0.6667,
+        "MUV": 0.5789,
+        "Sedan": 0.6522,
+        "Two-wheeler": 0.375,
+        "Bicycle": 0.2143,
+        "Van": 0.7222,
+        "Mini-bus": 0.7778
+      },
+      "40": {
+        "Tempo-traveller": 0.6316,
+        "SUV": 0.6111,
+        "Hatchback": 0.5,
+        "LCV": 0.5625,
+        "Truck": 0.5789,
+        "Other": 0.1818,
+        "Three-wheeler": 0.6429,
+        "Bus": 0.5,
+        "MUV": 0.3684,
+        "Sedan": 0.6087,
+        "Two-wheeler": 0.25,
+        "Bicycle": 0.1429,
+        "Van": 0.3889,
+        "Mini-bus": 0.6667
+      }
+    },
+    "report_eps": 20,
+    "most_fragile": [
+      {
+        "category": "Two-wheeler",
+        "recall_drop": 0.25
+      },
+      {
+        "category": "Three-wheeler",
+        "recall_drop": 0.2143
+      },
+      {
+        "category": "Tempo-traveller",
+        "recall_drop": 0.2106
+      }
+    ],
+    "lowest_recall_under_attack": [
+      "Two-wheeler",
+      "Bicycle",
+      "MUV"
+    ]
+  }
+}
